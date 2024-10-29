@@ -1,4 +1,13 @@
 import axios from "axios";
+const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_APP_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+
+
 export const getCurrentlyValueWalletApi = async ({
     document,
     phone,
@@ -7,8 +16,8 @@ export const getCurrentlyValueWalletApi = async ({
     phone: string;
 }) => {
   try {
-    const { data, status } = await axios.post(
-      "http://localhost:3001/api/v1/wallet/balance", {
+    const { data, status } = await api.post(
+      "/wallet/balance", {
         document,
         phone,
       }
@@ -37,8 +46,8 @@ export const loadWalletApi = async ({
     amount: number;
 }) => {
   try {
-    const { data, status } = await axios.post(
-      "http://localhost:3001/api/v1/wallet/load",
+    const { data, status } = await api.post(
+      "/wallet/load",
       {
         document,
         phone,
@@ -69,8 +78,8 @@ export const purchaseWalletApi = async ({
     amount: number;
 }) => {
   try {
-    const { data, status } = await axios.post(
-      "http://localhost:3001/api/v1/transactions/purchase",
+    const { data, status } = await api.post(
+      "/transactions/purchase",
       {
         document,
         phone,
@@ -98,8 +107,8 @@ export const confirmPaymentApi = async ({
     sessionId: string | null;
 }) => {
   try {
-    const { data, status } = await axios.post(
-      "http://localhost:3001/api/v1/transactions/confirm",
+    const { data, status } = await api.post(
+      "/transactions/confirm",
       {
         token,
         sessionId,

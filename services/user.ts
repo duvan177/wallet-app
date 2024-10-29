@@ -1,4 +1,10 @@
 import axios from "axios";
+const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_APP_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export const createUserApi = async (params: {
     document: string;
@@ -7,10 +13,7 @@ export const createUserApi = async (params: {
     email: string;
 }) => {
     try {
-        const { data } = await axios.post(
-          "http://localhost:3001/api/v1/clients/register",
-          params
-        );
+        const { data } = await api.post("/clients/register", params);
 
         return {
             data: data,
