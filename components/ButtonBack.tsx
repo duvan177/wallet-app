@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "antd";
+import { Button } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 type ButtonBackProps = {

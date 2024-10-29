@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Card,
@@ -9,27 +9,27 @@ import {
   Row,
   Col,
   InputNumber,
-  Flex,
 } from "antd";
 import Image from "next/image";
-import * as yup from "yup";
-// import api from '../services/api';
 import walletBg02 from "@/public/walletR.jpg";
 import { ButtonBack } from "@/components/ButtonBack";
 import { useWallet } from "@/hooks/useWallet";
-import { useAlertStore } from "@/store/alert";
-
 const gridStyle: React.CSSProperties = {
   padding: "0",
   maxWidth: 720,
   width: "100%",
 };
 
+type FormValues = {
+  document: string;
+  phone: string;
+  amount: number;
+};
+
 export default function LoadWallet() {
   const [form] = Form.useForm();
-  const setAlert = useAlertStore((state) => state.setAlert);
   const { loadWalletAmountApi, loadingService } = useWallet();
-  const onFinish = async (data: any) => {
+  const onFinish = async (data: FormValues) => {
     await loadWalletAmountApi(data);
   };
 

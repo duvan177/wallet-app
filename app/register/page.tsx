@@ -5,12 +5,17 @@ import Image from 'next/image';
 import walletR from '@/public/walletR.jpg';
 import { cardStyle } from '@/constants/cardStyle';
 import { useUser } from '@/hooks/useUser';
-
+type FormValues = {
+  document: string;
+  name: string;
+  email: string;
+  phone: string;
+};
 export default function Register() {
   const [form] = Form.useForm();
   const { createUser, loadingService } = useUser();
 
-  const onFinish = async(data: any) => await createUser(data);
+  const onFinish = async (data: FormValues) => await createUser(data);
 
   return (
     <div

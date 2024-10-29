@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Card,
@@ -15,6 +15,10 @@ import {
 } from "@ant-design/icons";
 import { useWallet } from "@/hooks/useWallet";
 import {cardStyle} from '@/constants/cardStyle';
+type FormValues = {
+  document: string;
+  phone: string;
+};
 export default function Home() {
 
   const [form] = Form.useForm();
@@ -27,10 +31,8 @@ export default function Home() {
   } = useWallet();
     const [api, contextHolder] = notification.useNotification();
 
-  const onFinish = async (data: any) => {
-
+  const onFinish = async (data: FormValues) => {
     await getCurrentlyValueWallet(data);
-    
   };
 
   React.useEffect(() => {

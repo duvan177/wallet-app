@@ -1,14 +1,17 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Card, Input, Typography, Form, Flex } from 'antd';
 import { useWallet } from '@/hooks/useWallet';
 import { ButtonBack } from '@/components/ButtonBack';
 import { cardStyle } from '@/constants/cardStyle';
+type FormValues = {
+  token: string;
+};
 
 export default function LoadWallet() {
   const [form] = Form.useForm();
   const { confirmPayment , loadingService  } = useWallet();
-  const onFinish = async (data: any) => await confirmPayment(data);
+  const onFinish = async (data: FormValues) => await confirmPayment(data);
   return (
     <div
       style={{

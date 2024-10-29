@@ -1,13 +1,10 @@
 'use client';
-import React, { useState } from 'react';
-import { Button, Card, Input, Typography, Form, Row, Col, InputNumber, Flex , Space, Divider } from 'antd';
+import React from 'react';
+import { Button, Card, Input, Typography, Form, Row, Col, InputNumber , Space, Divider } from 'antd';
 import Image from 'next/image';
-import * as yup from 'yup';
-// import api from '../services/api';
 import walletBg from "@/public/wallet01.jpg";
 import { useRouter } from 'next/navigation';
 import { ButtonBack } from '@/components/ButtonBack';
-import walletBg02 from "@/public/walletR.jpg";
 import { useWallet } from '@/hooks/useWallet';
 import { useSessionId } from '@/store/sessionId';
 const gridStyle: React.CSSProperties = {
@@ -15,14 +12,18 @@ const gridStyle: React.CSSProperties = {
   maxWidth: 720,
   width: "100%",
 };
+type FormValues = {
+  document: string;
+  phone: string;
+  amount: number;
+};
 export default function Purchase() {
   const router = useRouter();
-  const [message, setMessage] = useState('');
   const [form] = Form.useForm();
   const { purchaseWallet, loadingService } = useWallet();
   const sessionId = useSessionId((state) => state.sessionId);
 
-  const onFinish = async (data: any) => await purchaseWallet(data);
+  const onFinish = async (data: FormValues) => await purchaseWallet(data);
 
   return (
     <div
@@ -96,7 +97,6 @@ export default function Purchase() {
                  
                 </Form.Item>
               </Form>
-              <Typography.Text type="danger">{message}</Typography.Text>
               <Divider />
               {sessionId && (
                 <div >
