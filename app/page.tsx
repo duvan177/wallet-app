@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -14,8 +14,7 @@ import {
   VerticalAlignTopOutlined,
 } from "@ant-design/icons";
 import { useWallet } from "@/hooks/useWallet";
-import { cardStyle } from "@/constants/cardStyle";
-
+import {cardStyle} from '@/constants/cardStyle';
 export default function Home() {
 
   const [form] = Form.useForm();
@@ -56,7 +55,7 @@ export default function Home() {
       }}
     >
       {contextHolder}
-      <Card hoverable style={cardStyle} >
+      <Card hoverable style={cardStyle} bodyStyle={{ padding: 0 }}>
         <Flex justify="space-between">
           <Flex
             vertical
@@ -85,17 +84,26 @@ export default function Home() {
               >
                 <Input placeholder="Celular" />
               </Form.Item>
+              <Flex gap={10}>
+                <Form.Item>
+                  <Button 
+                  href="/register"
+                  size="middle">
+                    Registrarme
+                  </Button>
+                </Form.Item>
 
-              <Form.Item>
-                <Button
-                  loading={loadingService}
-                  size="middle"
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Consultar
-                </Button>
-              </Form.Item>
+                <Form.Item>
+                  <Button
+                    loading={loadingService}
+                    size="middle"
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Consultar
+                  </Button>
+                </Form.Item>
+              </Flex>
             </Form>
           </Flex>
 
@@ -108,7 +116,7 @@ export default function Home() {
             <Typography.Title level={3}>
               Saldo actual:{" "}
               <span style={{ color: "gray" }}>
-                {currentlyValue == null ? "$ #####" :  `$${currentlyValue}`}
+                {currentlyValue == null ? "$ #####" : `$${currentlyValue}`}
               </span>
             </Typography.Title>
             <Flex

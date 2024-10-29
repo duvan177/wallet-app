@@ -7,7 +7,7 @@ import { cardStyle } from '@/constants/cardStyle';
 
 export default function LoadWallet() {
   const [form] = Form.useForm();
-  const { confirmPayment  } = useWallet();
+  const { confirmPayment , loadingService  } = useWallet();
   const onFinish = async (data: any) => await confirmPayment(data);
   return (
     <div
@@ -19,9 +19,9 @@ export default function LoadWallet() {
       }}
     >
       <Card hoverable style={cardStyle}>
-               <Flex gap="middle" align="start" vertical>
+        <Flex gap="middle" align="start" vertical>
           <ButtonBack />
-          </Flex>
+        </Flex>
         <Flex gap="middle" align="center" vertical>
           <Typography.Title level={3}>Confirmar Pago</Typography.Title>
           <Form form={form} onFinish={onFinish} layout="vertical">
@@ -34,7 +34,7 @@ export default function LoadWallet() {
             </Form.Item>
 
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button loading={loadingService} type="primary" htmlType="submit">
                 Confirmar
               </Button>
             </Form.Item>
