@@ -1,7 +1,9 @@
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider } from "antd";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -24,14 +26,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" 
-    data-locator-target="vscode"
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#000000",
+          borderRadius: 10,
+          colorBgContainer: "white",
+        },
+      }}
     >
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-         <AntdRegistry>{children}</AntdRegistry>
-      </body>
-    </html>
+      <html lang="en" data-locator-target="vscode">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <AntdRegistry>{children}</AntdRegistry>
+        </body>
+      </html>
+    </ConfigProvider>
   );
 }

@@ -9,9 +9,12 @@ import {
   Row,
   Col,
   InputNumber,
-  Flex
+  Flex,
 } from "antd";
-import { VerticalAlignBottomOutlined  , VerticalAlignTopOutlined} from "@ant-design/icons";
+import {
+  VerticalAlignBottomOutlined,
+  VerticalAlignTopOutlined,
+} from "@ant-design/icons";
 import Image from "next/image";
 import * as yup from "yup";
 // import api from '../services/api';
@@ -48,73 +51,75 @@ export default function Home() {
             vertical
             align="center"
             justify="space-between"
-            style={{ padding: 32 , width:350 }}
+            style={{ padding: 32, width: 350 }}
           >
-        
-              <Typography.Title level={3}>tu wallet</Typography.Title>
-              <Form form={form} onFinish={onFinish} layout="vertical">
-                <Form.Item
-                  label="Documento"
-                  name="document"
-                  rules={[
-                    { required: true, message: "El documento es obligatorio" },
-                  ]}
-                >
-                  <Input placeholder="Número documento" />
-                </Form.Item>
+            <Typography.Title level={3}>tu wallet</Typography.Title>
+            <Form form={form} onFinish={onFinish} layout="vertical">
+              <Form.Item
+                label="Documento"
+                name="document"
+                rules={[
+                  { required: true, message: "El documento es obligatorio" },
+                ]}
+              >
+                <Input placeholder="Número documento" />
+              </Form.Item>
 
-                <Form.Item
-                  label="Celular"
-                  name="phone"
-                  rules={[
-                    { required: true, message: "El celular es obligatorio" },
-                  ]}
-                >
-                  <Input placeholder="Celular" />
-                </Form.Item>
- 
-                <Form.Item>
-                  <Button 
-                  style={{
-                    width:140,
-                    background: '#000000'
-                  }}
-                  type="primary" htmlType="submit">
-                    Consultar
-                  </Button>
-                </Form.Item>
-              </Form>
-       
+              <Form.Item
+                label="Celular"
+                name="phone"
+                rules={[
+                  { required: true, message: "El celular es obligatorio" },
+                ]}
+              >
+                <Input placeholder="Celular" />
+              </Form.Item>
+
+              <Form.Item>
+                <Button size="middle" type="primary" htmlType="submit">
+                  Consultar
+                </Button>
+              </Form.Item>
+            </Form>
           </Flex>
 
           <Flex
             vertical
             align="center"
             justify="center"
-            style={{ padding: 10 , background: "#c3ff4e" , width:'90%'}}
+            style={{ padding: 10, background: "#c3ff4e", width: "90%" }}
           >
-            <Typography.Title level={3}>Saldo actual: <span style={{color:'gray'}}> ######</span> </Typography.Title>
-               <Flex justify="space-between" gap={10} style={{ padding: 32 , width:'100%' }}>
-                  <Button style={{
-                    width:140,
-                    background: '#000000'
-                  }} type="primary" 
-                  icon={   <VerticalAlignTopOutlined />}  >
-                    pagar
-                 
-                  </Button>
-                    <Button
-                    style={{
-                    width:140,
-                       background: '#000000'
-                  }}
-                  icon={     <VerticalAlignBottomOutlined />}
-                    type="primary"   >
-                    recarga tu wallet
-
-               
-                  </Button>
-               </Flex>
+            <Typography.Title level={3}>
+              Saldo actual: <span style={{ color: "gray" }}> ######</span>{" "}
+            </Typography.Title>
+            <Flex
+              justify="space-between"
+              gap={10}
+              style={{ padding: 32, width: "100%" }}
+            >
+              <Button
+                style={{
+                  width: 160,
+                }}
+                href="/purchase"
+                type="primary"
+                icon={<VerticalAlignTopOutlined style={{ fontSize: "24px" }} />}
+              >
+                Pagar
+              </Button>
+              <Button
+                style={{
+                  width: 160,
+                }}
+                href="/load-wallet"
+                icon={
+                  <VerticalAlignBottomOutlined style={{ fontSize: "24px" }} />
+                }
+                type="primary"
+              >
+                Recarga tu wallet
+              </Button>
+            </Flex>
           </Flex>
         </Flex>
       </Card>

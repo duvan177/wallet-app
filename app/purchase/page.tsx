@@ -1,21 +1,20 @@
 'use client';
 import React, { useState } from 'react';
-import { Button, Card, Input, Typography, Form, Row, Col, InputNumber } from 'antd';
+import { Button, Card, Input, Typography, Form, Row, Col, InputNumber, Flex , Space } from 'antd';
 import Image from 'next/image';
 import * as yup from 'yup';
 // import api from '../services/api';
-import walletR from '@/public/walletR.jpg';
-import router from 'next/router';
-
-
-
-const cardStyle = {
+import walletBg from "@/public/wallet01.jpg";
+import { useRouter } from 'next/navigation';
+import { ButtonBack } from '@/components/ButtonBack';
+import walletBg02 from "@/public/walletR.jpg";
+const gridStyle: React.CSSProperties = {
+  padding: "0",
   maxWidth: 720,
-  width: '100%',
-  margin: '0 auto',
+  width: "100%",
 };
-
 export default function Purchase() {
+  const router = useRouter();
   const [message, setMessage] = useState('');
   const [form] = Form.useForm();
 
@@ -28,15 +27,20 @@ export default function Purchase() {
     <div
       style={{
         minHeight: "100vh",
-        padding: "20px", // Añadimos padding para pantallas pequeñas
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: 0,
       }}
     >
-      <Card hoverable style={cardStyle} bodyStyle={{ padding: 0 }}>
+      <Card hoverable >
+      <Card.Grid style={gridStyle}>
         <Row gutter={0} align="middle">
-          <Col xs={24} sm={24} md={12} style={{ padding: 25 }}>
+          <Col xs={24} sm={24} md={12} style={{ padding: 20 }}>
+        
+              <ButtonBack />
+   
+        <Space/>
             <Typography.Title level={3}>Pagar compra enviada</Typography.Title>
             <Form form={form} onFinish={onFinish} layout="vertical">
               <Form.Item
@@ -83,10 +87,9 @@ export default function Purchase() {
               </Form.Item>
             </Form>
             <Typography.Text type="danger">{message}</Typography.Text>
-            <Col style={{ padding: 25 }} >
-            {true && (
+            
+            {/* {true && (
               <div>
-                <p>ID de Sesión: {'asd123asd123'}</p>
                 <p>
                   Revisa tu correo electrónico para obtener el token de
                   confirmación.
@@ -95,10 +98,20 @@ export default function Purchase() {
                   Confirmar Pago
                 </Button>
               </div>
-            )}
-            </Col>
+            )} */}
+
           </Col>
+          <Col xs={24} sm={24} md={12} >
+            <Image
+              src={walletBg}
+              alt="wallet"
+              layout="responsive"
+              width={500}
+              height={500}
+            />
+            </Col>
         </Row>
+        </Card.Grid>
       </Card>
     </div>
   );

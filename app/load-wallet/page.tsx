@@ -1,24 +1,34 @@
-'use client';
-import React, { useState } from 'react';
-import { Button, Card, Input, Typography, Form, Row, Col, InputNumber } from 'antd';
-import Image from 'next/image';
-import * as yup from 'yup';
+"use client";
+import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  Input,
+  Typography,
+  Form,
+  Row,
+  Col,
+  InputNumber,
+  Flex,
+} from "antd";
+import Image from "next/image";
+import * as yup from "yup";
 // import api from '../services/api';
-import walletR from '@/public/walletR.jpg';
+import walletBg02 from "@/public/walletR.jpg";
+import { ButtonBack } from "@/components/ButtonBack";
 
-
-
-const cardStyle = {
+const gridStyle: React.CSSProperties = {
+  padding: "0",
   maxWidth: 720,
-  width: '100%',
-  margin: '0 auto',
+  width: "100%",
+  
 };
 
 export default function LoadWallet() {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [form] = Form.useForm();
 
-  const onFinish = (data:any) => {
+  const onFinish = (data: any) => {
     console.log(data);
     // Lógica para enviar los datos al backend
   };
@@ -27,62 +37,76 @@ export default function LoadWallet() {
     <div
       style={{
         minHeight: "100vh",
-        padding: "20px", // Añadimos padding para pantallas pequeñas
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: 0,
       }}
     >
-      <Card hoverable style={cardStyle} bodyStyle={{ padding: 0 }}>
-        <Row gutter={0} align="middle">
-          <Col xs={24} sm={24} md={12} style={{ padding: 25 }}>
-            <Typography.Title level={3}>Recarga tu wallet</Typography.Title>
-            <Form form={form} onFinish={onFinish} layout="vertical">
-              <Form.Item
-                label="Documento"
-                name="document"
-                rules={[
-                  { required: true, message: "El documento es obligatorio" },
-                ]}
-              >
-                <Input placeholder="Número documento" />
-              </Form.Item>
+      <Card hoverable>
+        <Card.Grid style={gridStyle}>
+          <Row gutter={0} align="middle">
+            <Col xs={24} sm={24} md={12} style={{ padding: 25 }}>
+              <Col xs={24} sm={24} md={12} style={{ }}>
+                <ButtonBack />
+              </Col>
+              <Typography.Title level={3}>Recarga tu wallet</Typography.Title>
+              <Form form={form} onFinish={onFinish} layout="vertical">
+                <Form.Item
+                  label="Documento"
+                  name="document"
+                  rules={[
+                    { required: true, message: "El documento es obligatorio" },
+                  ]}
+                >
+                  <Input placeholder="Número documento" />
+                </Form.Item>
 
-              <Form.Item
-                label="Celular"
-                name="phone"
-                rules={[
-                  { required: true, message: "El celular es obligatorio" },
-                ]}
-              >
-                <Input placeholder="Celular" />
-              </Form.Item>
-              <Form.Item
-                label="Cantidad"
-                name="amount"
-                rules={[
-                  { required: true, message: "Cantidad a recargar" },
-                  {
-                    type: "number",
-                    max: 1000,
-                    message: "Cantidad maxima 1000"
-                  }
-                ]}
-              >
-                <InputNumber
-                  min={1}
-                  style={{ width: "100%" }}
-                  placeholder='Cantidad a recargar'
-                />
-              </Form.Item>
-              <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  Recargar
-                </Button>
-              </Form.Item>
-            </Form>
-          </Col>
-        </Row>
+                <Form.Item
+                  label="Celular"
+                  name="phone"
+                  rules={[
+                    { required: true, message: "El celular es obligatorio" },
+                  ]}
+                >
+                  <Input placeholder="Celular" />
+                </Form.Item>
+                <Form.Item
+                  label="Cantidad"
+                  name="amount"
+                  rules={[
+                    { required: true, message: "Cantidad a recargar" },
+                    {
+                      type: "number",
+                      max: 1000,
+                      message: "Cantidad maxima 1000",
+                    },
+                  ]}
+                >
+                  <InputNumber
+                    min={1}
+                    style={{ width: "100%" }}
+                    placeholder="Cantidad a recargar"
+                  />
+                </Form.Item>
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Recargar
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Col>
+            <Col xs={24} sm={24} md={12}>
+              <Image
+                src={walletBg02}
+                alt="wallet"
+                layout="responsive"
+                width={500}
+                height={500}
+              />
+            </Col>
+          </Row>
+        </Card.Grid>
       </Card>
     </div>
   );
