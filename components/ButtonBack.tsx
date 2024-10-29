@@ -1,11 +1,21 @@
 import { Button, ButtonProps } from "antd";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
-export function ButtonBack(props: ButtonProps) {
+type ButtonBackProps = {
+  isBack?: boolean;
+  to?: string;
+};
+export function ButtonBack({ isBack = false, to }: ButtonBackProps) {
   const router = useRouter();
     return (
       <Button
-        onClick={() => router.push("/")}
+        onClick={() => {
+          if (isBack) {
+            router.back();
+          } else {
+            router.push(to || "/");
+          }
+        }}
         type="text"
         icon={<ArrowLeftOutlined />}
       >
