@@ -1,34 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Card,
   Input,
   Typography,
   Form,
-  Row,
-  Col,
-  InputNumber,
   Flex,
   notification,
-  Alert,
-  message,
 } from "antd";
 import {
   VerticalAlignBottomOutlined,
   VerticalAlignTopOutlined,
 } from "@ant-design/icons";
-import Image from "next/image";
-import * as yup from "yup";
-// import api from '../services/api';
-import walletR from "@/public/walletR.jpg";
 import { useWallet } from "@/hooks/useWallet";
-
-const cardStyle = {
-  maxWidth: 720,
-  width: "100%",
-  margin: "0 auto",
-};
+import { cardStyle } from "@/constants/cardStyle";
 
 export default function Home() {
 
@@ -70,7 +56,7 @@ export default function Home() {
       }}
     >
       {contextHolder}
-      <Card hoverable style={cardStyle} bodyStyle={{ padding: 0 }}>
+      <Card hoverable style={cardStyle} >
         <Flex justify="space-between">
           <Flex
             vertical

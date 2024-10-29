@@ -3,14 +3,7 @@ import React, { useState } from 'react';
 import { Button, Card, Input, Typography, Form, Flex } from 'antd';
 import { useWallet } from '@/hooks/useWallet';
 import { ButtonBack } from '@/components/ButtonBack';
-
-
-
-const cardStyle = {
-  maxWidth: 720,
-  width: '100%',
-  margin: '0 auto',
-};
+import { cardStyle } from '@/constants/cardStyle';
 
 export default function LoadWallet() {
   const [form] = Form.useForm();
