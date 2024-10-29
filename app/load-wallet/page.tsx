@@ -16,21 +16,21 @@ import * as yup from "yup";
 // import api from '../services/api';
 import walletBg02 from "@/public/walletR.jpg";
 import { ButtonBack } from "@/components/ButtonBack";
+import { useWallet } from "@/hooks/useWallet";
+import { useAlertStore } from "@/store/alert";
 
 const gridStyle: React.CSSProperties = {
   padding: "0",
   maxWidth: 720,
   width: "100%",
-  
 };
 
 export default function LoadWallet() {
-  const [message, setMessage] = useState("");
   const [form] = Form.useForm();
-
-  const onFinish = (data: any) => {
-    console.log(data);
-    // Lógica para enviar los datos al backend
+  const setAlert = useAlertStore((state) => state.setAlert);
+  const { loadWalletAmountApi, loadingService } = useWallet();
+  const onFinish = async (data: any) => {
+    await loadWalletAmountApi(data);
   };
 
   return (
@@ -47,7 +47,7 @@ export default function LoadWallet() {
         <Card.Grid style={gridStyle}>
           <Row gutter={0} align="middle">
             <Col xs={24} sm={24} md={12} style={{ padding: 25 }}>
-              <Col xs={24} sm={24} md={12} style={{ }}>
+              <Col xs={24} sm={24} md={12} style={{}}>
                 <ButtonBack />
               </Col>
               <Typography.Title level={3}>Recarga tu wallet</Typography.Title>
@@ -90,7 +90,11 @@ export default function LoadWallet() {
                   />
                 </Form.Item>
                 <Form.Item>
-                  <Button type="primary" htmlType="submit">
+                  <Button
+                    loading={loadingService}
+                    type="primary"
+                    htmlType="submit"
+                  >
                     Recargar
                   </Button>
                 </Form.Item>

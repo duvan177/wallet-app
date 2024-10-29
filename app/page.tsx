@@ -10,6 +10,9 @@ import {
   Col,
   InputNumber,
   Flex,
+  notification,
+  Alert,
+  message,
 } from "antd";
 import {
   VerticalAlignBottomOutlined,
@@ -19,6 +22,7 @@ import Image from "next/image";
 import * as yup from "yup";
 // import api from '../services/api';
 import walletR from "@/public/walletR.jpg";
+import { useWallet } from "@/hooks/useWallet";
 
 const cardStyle = {
   maxWidth: 720,
@@ -27,24 +31,45 @@ const cardStyle = {
 };
 
 export default function Home() {
-  const [message, setMessage] = useState("");
-  const [form] = Form.useForm();
 
-  const onFinish = (data: any) => {
-    console.log(data);
-    // Lógica para enviar los datos al backend
+  const [form] = Form.useForm();
+  const {
+    loadingService,
+    currentlyValue,
+    getCurrentlyValueWallet,
+    messageError,
+    
+  } = useWallet();
+    const [api, contextHolder] = notification.useNotification();
+
+  const onFinish = async (data: any) => {
+
+    await getCurrentlyValueWallet(data);
+    
   };
+
+  React.useEffect(() => {
+    if (messageError) {
+      api.error({
+        message: "Error",
+        description: messageError,
+      });
+    }
+  }
+  ,[messageError]);
+
+
 
   return (
     <div
       style={{
         minHeight: "100vh",
-        padding: "20px", // Añadimos padding para pantallas pequeñas
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
+      {contextHolder}
       <Card hoverable style={cardStyle} bodyStyle={{ padding: 0 }}>
         <Flex justify="space-between">
           <Flex
@@ -76,7 +101,12 @@ export default function Home() {
               </Form.Item>
 
               <Form.Item>
-                <Button size="middle" type="primary" htmlType="submit">
+                <Button
+                  loading={loadingService}
+                  size="middle"
+                  type="primary"
+                  htmlType="submit"
+                >
                   Consultar
                 </Button>
               </Form.Item>
@@ -90,7 +120,10 @@ export default function Home() {
             style={{ padding: 10, background: "#c3ff4e", width: "90%" }}
           >
             <Typography.Title level={3}>
-              Saldo actual: <span style={{ color: "gray" }}> ######</span>{" "}
+              Saldo actual:{" "}
+              <span style={{ color: "gray" }}>
+                {currentlyValue == null ? "$ #####" :  `$${currentlyValue}`}
+              </span>
             </Typography.Title>
             <Flex
               justify="space-between"

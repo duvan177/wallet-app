@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
+import { Notification } from "@/components/Notification";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <ConfigProvider
       theme={{
@@ -40,6 +42,7 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <AntdRegistry>{children}</AntdRegistry>
+          <Notification />
         </body>
       </html>
     </ConfigProvider>
