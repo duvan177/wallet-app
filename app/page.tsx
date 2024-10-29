@@ -1,101 +1,123 @@
+"use client";
+import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  Input,
+  Typography,
+  Form,
+  Row,
+  Col,
+  InputNumber,
+  Flex
+} from "antd";
+import { VerticalAlignBottomOutlined  , VerticalAlignTopOutlined} from "@ant-design/icons";
 import Image from "next/image";
+import * as yup from "yup";
+// import api from '../services/api';
+import walletR from "@/public/walletR.jpg";
+
+const cardStyle = {
+  maxWidth: 720,
+  width: "100%",
+  margin: "0 auto",
+};
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [message, setMessage] = useState("");
+  const [form] = Form.useForm();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const onFinish = (data: any) => {
+    console.log(data);
+    // Lógica para enviar los datos al backend
+  };
+
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "20px", // Añadimos padding para pantallas pequeñas
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Card hoverable style={cardStyle} bodyStyle={{ padding: 0 }}>
+        <Flex justify="space-between">
+          <Flex
+            vertical
+            align="center"
+            justify="space-between"
+            style={{ padding: 32 , width:350 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        
+              <Typography.Title level={3}>tu wallet</Typography.Title>
+              <Form form={form} onFinish={onFinish} layout="vertical">
+                <Form.Item
+                  label="Documento"
+                  name="document"
+                  rules={[
+                    { required: true, message: "El documento es obligatorio" },
+                  ]}
+                >
+                  <Input placeholder="Número documento" />
+                </Form.Item>
+
+                <Form.Item
+                  label="Celular"
+                  name="phone"
+                  rules={[
+                    { required: true, message: "El celular es obligatorio" },
+                  ]}
+                >
+                  <Input placeholder="Celular" />
+                </Form.Item>
+ 
+                <Form.Item>
+                  <Button 
+                  style={{
+                    width:140,
+                    background: '#000000'
+                  }}
+                  type="primary" htmlType="submit">
+                    Consultar
+                  </Button>
+                </Form.Item>
+              </Form>
+       
+          </Flex>
+
+          <Flex
+            vertical
+            align="center"
+            justify="center"
+            style={{ padding: 10 , background: "#c3ff4e" , width:'90%'}}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <Typography.Title level={3}>Saldo actual: <span style={{color:'gray'}}> ######</span> </Typography.Title>
+               <Flex justify="space-between" gap={10} style={{ padding: 32 , width:'100%' }}>
+                  <Button style={{
+                    width:140,
+                    background: '#000000'
+                  }} type="primary" 
+                  icon={   <VerticalAlignTopOutlined />}  >
+                    pagar
+                 
+                  </Button>
+                    <Button
+                    style={{
+                    width:140,
+                       background: '#000000'
+                  }}
+                  icon={     <VerticalAlignBottomOutlined />}
+                    type="primary"   >
+                    recarga tu wallet
+
+               
+                  </Button>
+               </Flex>
+          </Flex>
+        </Flex>
+      </Card>
     </div>
   );
 }
